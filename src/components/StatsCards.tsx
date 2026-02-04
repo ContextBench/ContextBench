@@ -14,50 +14,43 @@ export const StatsCards = () => {
       label: "Total Models",
       value: totalModels,
       icon: Users,
-      description: "Validated LLM Agents",
       color: "text-blue-600",
-      bgColor: "bg-blue-50"
+      bgColor: "bg-blue-50/50"
     },
     {
       label: "Best Pass@1",
       value: `${(bestPassAt1 * 100).toFixed(1)}%`,
       icon: Target,
-      description: "Highest Success Rate",
       color: "text-emerald-600",
-      bgColor: "bg-emerald-50"
+      bgColor: "bg-emerald-50/50"
     },
     {
       label: "Avg. Efficiency",
       value: avgEfficiency.toFixed(3),
       icon: Zap,
-      description: "Retrieval Precision",
       color: "text-amber-600",
-      bgColor: "bg-amber-50"
+      bgColor: "bg-amber-50/50"
     },
     {
       label: "Avg. Line F1",
       value: avgLineF1.toFixed(3),
       icon: TrendingUp,
-      description: "Context Accuracy",
       color: "text-indigo-600",
-      bgColor: "bg-indigo-50"
+      bgColor: "bg-indigo-50/50"
     }
   ];
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-8">
       {stats.map((stat, index) => (
-        <Card key={index} className="overflow-hidden border-none shadow-sm bg-muted/30">
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-muted-foreground">{stat.label}</p>
-                <h3 className="text-2xl font-bold mt-1 tracking-tight">{stat.value}</h3>
-                <p className="text-xs text-muted-foreground mt-1">{stat.description}</p>
-              </div>
-              <div className={`p-3 rounded-xl ${stat.bgColor}`}>
-                <stat.icon className={`h-6 w-6 ${stat.color}`} />
-              </div>
+        <Card key={index} className="border-none shadow-none bg-muted/20">
+          <CardContent className="p-4 flex items-center gap-4">
+            <div className={`p-2 rounded-lg ${stat.bgColor} shrink-0`}>
+              <stat.icon className={`h-4 w-4 ${stat.color}`} />
+            </div>
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/80">{stat.label}</p>
+              <h3 className="text-lg font-bold tracking-tight">{stat.value}</h3>
             </div>
           </CardContent>
         </Card>

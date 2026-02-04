@@ -5,37 +5,36 @@ import { Hero } from "@/components/Hero";
 import { LeaderboardTable } from "@/components/LeaderboardTable";
 import { RetrievalTable } from "@/components/RetrievalTable";
 import { StatsCards } from "@/components/StatsCards";
-import { CitationBlock } from "@/components/CitationBlock";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-screen bg-background flex flex-col">
       <Navbar />
-      <Hero />
       
-      <div className="container px-4 mx-auto pb-20">
+      <div className="container px-4 mx-auto flex-1">
+        <Hero />
         <StatsCards />
 
         <Tabs defaultValue="performance" className="w-full">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
-            <div className="space-y-1">
-              <h2 className="text-3xl font-bold tracking-tight">Benchmark Results</h2>
-              <p className="text-muted-foreground">Comprehensive evaluation of 4 state-of-the-art LLM agents.</p>
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+            <div className="space-y-0.5">
+              <h2 className="text-xl font-bold tracking-tight">Benchmark Results</h2>
+              <p className="text-xs text-muted-foreground">Comparative evaluation across multiple metrics.</p>
             </div>
-            <TabsList className="grid w-full md:w-auto grid-cols-2 h-11 p-1 bg-muted/50 border">
-              <TabsTrigger value="performance" className="data-[state=active]:bg-background data-[state=active]:shadow-sm px-8">Performance</TabsTrigger>
-              <TabsTrigger value="retrieval" className="data-[state=active]:bg-background data-[state=active]:shadow-sm px-8">Retrieval Analysis</TabsTrigger>
+            <TabsList className="h-9 p-1 bg-muted/30 border border-muted/50">
+              <TabsTrigger value="performance" className="text-xs px-6 data-[state=active]:bg-background">Performance</TabsTrigger>
+              <TabsTrigger value="retrieval" className="text-xs px-6 data-[state=active]:bg-background">Retrieval Analysis</TabsTrigger>
             </TabsList>
           </div>
 
           <TabsContent value="performance" className="mt-0 outline-none">
             <motion.div
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 5 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4 }}
+              transition={{ duration: 0.3 }}
             >
               <LeaderboardTable />
             </motion.div>
@@ -43,64 +42,33 @@ export default function Home() {
 
           <TabsContent value="retrieval" className="mt-0 outline-none">
             <motion.div
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 5 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4 }}
+              transition={{ duration: 0.3 }}
             >
-              <div className="bg-card rounded-xl border shadow-sm overflow-hidden">
-                <div className="p-6 border-b flex flex-col md:flex-row md:items-center justify-between gap-4 bg-muted/20">
-                  <div>
-                    <h3 className="text-xl font-semibold tracking-tight">Retrieval Efficiency & Dynamics</h3>
-                    <p className="text-sm text-muted-foreground">Detailed trade-offs between cost, steps, and redundancy.</p>
-                  </div>
+              <div className="bg-card rounded-lg border border-muted/40 overflow-hidden shadow-sm">
+                <div className="p-4 border-b border-muted/40 bg-muted/5">
+                  <h3 className="text-sm font-bold tracking-tight">Retrieval Efficiency & Dynamics</h3>
                 </div>
-                <div className="p-6">
+                <div className="p-4">
                   <RetrievalTable />
                 </div>
               </div>
             </motion.div>
           </TabsContent>
         </Tabs>
-        
-        <div className="mt-24 grid grid-cols-1 md:grid-cols-3 gap-8">
-          {[
-            {
-              title: "Multi-level Evaluation",
-              description: "Assessing models at file, block, and line levels to capture the full spectrum of retrieval accuracy.",
-              color: "bg-blue-500",
-            },
-            {
-              title: "Agentic Frameworks",
-              description: "Benchmarks conducted using standardized coding agent scaffolding to reflect real-world automated development.",
-              color: "bg-indigo-500",
-            },
-            {
-              title: "Retrieval Dynamics",
-              description: "Deep analysis of the internal mechanics of retrieval, including step efficiency and usage drop metrics.",
-              color: "bg-emerald-500",
-            }
-          ].map((item, i) => (
-            <div key={i} className="group p-8 rounded-2xl border bg-card/50 transition-all hover:shadow-md hover:border-primary/20 relative overflow-hidden">
-              <div className={cn("absolute top-0 left-0 w-1 h-full", item.color)} />
-              <h3 className="font-bold text-xl mb-3 tracking-tight">{item.title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                {item.description}
-              </p>
-            </div>
-          ))}
-        </div>
-
-        <CitationBlock />
-
-        <footer className="mt-20 pt-10 border-t flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
-          <p>© 2026 ContextBench Research Group.</p>
-          <div className="flex gap-6">
-            <a href="#" className="hover:text-foreground transition-colors">Privacy</a>
-            <a href="#" className="hover:text-foreground transition-colors">Terms</a>
-            <a href="#" className="hover:text-foreground transition-colors">Methodology</a>
-          </div>
-        </footer>
       </div>
+
+      <footer className="mt-20 py-8 border-t bg-muted/5">
+        <div className="container px-4 mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] uppercase tracking-widest text-muted-foreground/60 font-bold">
+          <p>© 2026 ContextBench Research Group</p>
+          <div className="flex gap-8">
+            <a href="https://github.com/anonymousUser2026/ContextBench" className="hover:text-foreground transition-colors">Documentation</a>
+            <a href="https://huggingface.co/datasets/Contextbench/ContextBench" className="hover:text-foreground transition-colors">Data</a>
+            <a href="mailto:contact@contextbench.org" className="hover:text-foreground transition-colors">Contact</a>
+          </div>
+        </div>
+      </footer>
     </main>
   );
 }

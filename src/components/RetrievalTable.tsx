@@ -16,7 +16,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Info, TrendingDown, TrendingUp, DollarSign } from "lucide-react";
+import { Info, DollarSign } from "lucide-react";
 import { cn } from "@/lib/utils";
 import resultsData from "@/data/results.json";
 
@@ -26,7 +26,7 @@ const columns: ColumnDef<BenchmarkResult>[] = [
   {
     accessorKey: "model",
     header: "Model",
-    cell: ({ row }) => <span className="font-bold">{row.getValue("model")}</span>,
+    cell: ({ row }) => <span className="font-bold text-sm tracking-tight">{row.getValue("model")}</span>,
   },
   {
     accessorKey: "patterns.avg_steps_per_instance",
@@ -34,13 +34,13 @@ const columns: ColumnDef<BenchmarkResult>[] = [
     cell: ({ row }) => {
       const val = row.original.patterns.avg_steps_per_instance;
       const isMin = val === Math.min(...resultsData.map(r => r.patterns.avg_steps_per_instance));
-      return <span className={cn("font-mono", isMin && "text-primary font-bold")}>{val}</span>;
+      return <span className={cn("font-mono text-xs tabular-nums", isMin && "text-primary font-bold")}>{val}</span>;
     },
   },
   {
     accessorKey: "patterns.avg_lines_per_step",
     header: "Lines / Step",
-    cell: ({ row }) => <span className="font-mono">{row.original.patterns.avg_lines_per_step}</span>,
+    cell: ({ row }) => <span className="font-mono text-xs tabular-nums">{row.original.patterns.avg_lines_per_step}</span>,
   },
   {
     accessorKey: "dynamics.efficiency",
@@ -49,11 +49,9 @@ const columns: ColumnDef<BenchmarkResult>[] = [
       const val = row.original.dynamics.efficiency;
       const isMax = val === Math.max(...resultsData.map(r => r.dynamics.efficiency));
       return (
-        <div className="flex items-center gap-2">
-          <span className={cn("font-mono font-medium", isMax ? "text-green-600 font-bold bg-green-50 px-1 rounded" : "text-foreground")}>
-            {val.toFixed(3)}
-          </span>
-        </div>
+        <span className={cn("font-mono text-xs tabular-nums", isMax ? "text-emerald-600 font-bold" : "text-foreground")}>
+          {val.toFixed(3)}
+        </span>
       );
     },
   },
@@ -64,7 +62,7 @@ const columns: ColumnDef<BenchmarkResult>[] = [
       const val = row.original.dynamics.redundancy;
       const isMin = val === Math.min(...resultsData.map(r => r.dynamics.redundancy));
       return (
-        <span className={cn("font-mono", isMin ? "text-primary font-bold bg-primary/5 px-1 rounded" : "text-red-500")}>
+        <span className={cn("font-mono text-xs tabular-nums", isMin ? "text-primary font-bold" : "text-red-500/80")}>
           {val.toFixed(3)}
         </span>
       );
@@ -77,7 +75,7 @@ const columns: ColumnDef<BenchmarkResult>[] = [
       const val = row.original.patterns.avg_cost_per_instance;
       const isMin = val === Math.min(...resultsData.map(r => r.patterns.avg_cost_per_instance));
       return (
-        <div className={cn("flex items-center gap-1 font-mono font-bold", isMin && "text-green-600")}>
+        <div className={cn("flex items-center gap-0.5 font-mono text-xs tabular-nums font-bold", isMin && "text-emerald-600")}>
           <DollarSign className="h-3 w-3" />
           {val.toFixed(2)}
         </div>
@@ -96,13 +94,13 @@ export const RetrievalTable = () => {
 
   return (
     <div className="w-full">
-      <div className="rounded-md border bg-card">
+      <div className="rounded-lg border border-muted/30">
         <Table>
-          <TableHeader>
+          <TableHeader className="bg-muted/5">
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id} className="hover:bg-transparent">
+              <TableRow key={headerGroup.id} className="hover:bg-transparent border-b border-muted/30">
                 {headerGroup.headers.map((header) => (
-                  <TableHead key={header.id} className="font-semibold text-foreground py-4">
+                  <TableHead key={header.id} className="font-bold text-foreground py-3 px-4 text-[10px] uppercase tracking-widest">
                     {flexRender(header.column.columnDef.header, header.getContext())}
                   </TableHead>
                 ))}
@@ -111,9 +109,9 @@ export const RetrievalTable = () => {
           </TableHeader>
           <TableBody>
             {table.getRowModel().rows.map((row) => (
-              <TableRow key={row.id}>
+              <TableRow key={row.id} className="border-b border-muted/20 last:border-0 hover:bg-muted/5">
                 {row.getVisibleCells().map((cell) => (
-                  <TableCell key={cell.id} className="py-4">
+                  <TableCell key={cell.id} className="py-3 px-4">
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </TableCell>
                 ))}
@@ -122,12 +120,12 @@ export const RetrievalTable = () => {
           </TableBody>
         </Table>
       </div>
-      <div className="mt-4 p-4 bg-blue-50/50 rounded-lg border border-blue-100 text-sm text-blue-800 flex gap-3">
-        <Info className="h-5 w-5 shrink-0" />
+      <div className="mt-4 p-3 bg-muted/20 rounded-lg border border-muted/30 text-[11px] text-muted-foreground flex gap-3 leading-relaxed">
+        <Info className="h-4 w-4 shrink-0 text-primary opacity-60" />
         <p>
-          <strong>Efficiency</strong> measures the ratio of useful context retrieved per step. 
-          <strong> Redundancy</strong> indicates the overlap between subsequent retrieval steps.
-          Higher efficiency and lower redundancy generally lead to better cost-performance trade-offs.
+          <strong className="text-foreground">Efficiency</strong> measures useful context per step. 
+          <strong className="text-foreground ml-2">Redundancy</strong> indicates retrieval overlap.
+          Higher efficiency and lower redundancy optimize performance-to-cost ratios.
         </p>
       </div>
     </div>
