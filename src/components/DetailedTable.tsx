@@ -121,11 +121,11 @@ export const DetailedTable = ({ systemType }: DetailedTableProps) => {
       id: "dynamics",
       header: () => <div className="text-center py-1.5 bg-amber-100/50 rounded-md text-[10px] font-bold uppercase tracking-widest text-amber-500 mb-1.5 border border-amber-200/50">Dynamics & Cost</div>,
       columns: [
-        { accessorKey: "patterns.avg_steps_per_instance", header: "Steps", cell: ({ row }) => <MetricCell value={row.original.patterns?.avg_steps_per_instance} /> },
-        { accessorKey: "patterns.avg_lines_per_step", header: "Lines", cell: ({ row }) => <MetricCell value={row.original.patterns?.avg_lines_per_step} /> },
-        { accessorKey: "dynamics.efficiency", header: "Eff.", cell: ({ row }) => <MetricCell value={row.original.dynamics?.efficiency} /> },
-        { accessorKey: "dynamics.redundancy", header: "Red.", cell: ({ row }) => <MetricCell value={row.original.dynamics?.redundancy} colorClass="text-red-400" /> },
-        { accessorKey: "patterns.avg_cost_per_instance", header: "Cost", cell: ({ row }) => <span className="font-mono text-[13px] font-bold text-amber-600">{row.original.patterns?.avg_cost_per_instance ? `$${row.original.patterns.avg_cost_per_instance.toFixed(2)}` : "--"}</span> },
+        { accessorKey: "patterns.avg_steps_per_instance", header: "Steps", cell: ({ row }) => <MetricCell value={row.original.patterns?.avg_steps_per_instance} />, sortUndefined: -1 },
+        { accessorKey: "patterns.avg_lines_per_step", header: "Lines", cell: ({ row }) => <MetricCell value={row.original.patterns?.avg_lines_per_step} />, sortUndefined: -1 },
+        { accessorKey: "dynamics.efficiency", header: "Eff.", cell: ({ row }) => <MetricCell value={row.original.dynamics?.efficiency} />, sortUndefined: -1 },
+        { accessorKey: "dynamics.redundancy", header: "Red.", cell: ({ row }) => <MetricCell value={row.original.dynamics?.redundancy} colorClass="text-red-400" />, sortUndefined: -1 },
+        { accessorKey: "patterns.avg_cost_per_instance", header: "Cost", cell: ({ row }) => <span className="font-mono text-[13px] font-bold text-amber-600">{row.original.patterns?.avg_cost_per_instance ? `$${row.original.patterns.avg_cost_per_instance.toFixed(2)}` : "--"}</span>, sortUndefined: -1 },
       ],
     },
   ], []);

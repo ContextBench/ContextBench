@@ -42,6 +42,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import backboneData from "@/data/backbone_results.json";
 import agentData from "@/data/agent_results.json";
 
+// Define a unified interface for the table data
 export interface BenchmarkResult {
   model: string;
   performance: {
@@ -101,7 +102,13 @@ interface LeaderboardTableProps {
 
 export const LeaderboardTable = ({ primaryMetric, systemType }: LeaderboardTableProps) => {
   const data = useMemo<BenchmarkResult[]>(() => {
-    return (systemType === "agent" ? agentData : backboneData) as BenchmarkResult[];
+    const rawData = systemType === "agent" ? agentData : backboneData;
+    return rawData.map(r => ({
+      ...r,
+      model: systemType === "agent" && !agentData.find(ad => ad.model === r.model) 
+        ? `cmini-swe-agent + ${r.model}` 
+        : r.model
+    })) as BenchmarkResult[];
   }, [systemType]);
 
   const [sorting, setSorting] = useState<SortingState>([
@@ -238,6 +245,7 @@ export const LeaderboardTable = ({ primaryMetric, systemType }: LeaderboardTable
           </div>
         );
       },
+      sortUndefined: -1,
     },
     {
       id: "cost",
@@ -261,6 +269,7 @@ export const LeaderboardTable = ({ primaryMetric, systemType }: LeaderboardTable
           </div>
         );
       },
+      sortUndefined: -1,
     },
   ], [maxPass, maxLineF1, maxEfficiency, primaryMetric]);
 
@@ -354,7 +363,7 @@ export const LeaderboardTable = ({ primaryMetric, systemType }: LeaderboardTable
                                 <div className="bg-background p-8 rounded-2xl border border-muted/50 shadow-sm">
                                   <div className="flex items-center gap-2.5 mb-8 text-primary">
                                     <TrendingUp className="h-5 w-5" />
-                                    <h4 className="text-xs font-bold uppercase tracking-widest">Retrieval Efficiency</h4>
+                                    <h4 className="text-[10px] font-bold uppercase tracking-widest">Retrieval Efficiency</h4>
                                   </div>
                                   <div className="space-y-5">
                                     {[
@@ -374,7 +383,7 @@ export const LeaderboardTable = ({ primaryMetric, systemType }: LeaderboardTable
                                 <div className="bg-background p-8 rounded-2xl border border-muted/50 shadow-sm">
                                   <div className="flex items-center gap-2.5 mb-8 text-indigo-500">
                                     <Zap className="h-5 w-5" />
-                                    <h4 className="text-xs font-bold uppercase tracking-widest">Scale & Steps</h4>
+                                    <h4 className="text-[10px] font-bold uppercase tracking-widest">Scale & Steps</h4>
                                   </div>
                                   <div className="space-y-5">
                                     {[
