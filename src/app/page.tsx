@@ -98,6 +98,12 @@ export default function Home() {
                 transition={{ duration: 0.4 }}
               >
                 <LeaderboardTable primaryMetric={primaryMetric} systemType={systemType} />
+                {systemType === "agent" && (
+                  <p className="mt-4 text-[11px] text-muted-foreground italic flex items-center gap-2 px-2">
+                    <Settings2 className="h-3 w-3" />
+                    Note: Agents prefixed with <span className="font-bold text-primary not-italic">"c"</span> represent specialized versions with task-specific adaptations for ContextBench.
+                  </p>
+                )}
               </motion.div>
             </TabsContent>
 
