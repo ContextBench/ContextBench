@@ -54,7 +54,7 @@ export const PipelineSection = () => {
       </div>
 
       {/* Data Flow */}
-      <div className="space-y-2 max-w-[95vw] mx-auto">
+      <div className="space-y-2 max-w-5xl mx-auto">
         <div className="text-center space-y-1.5">
           <h2 className="text-3xl font-bold tracking-tight">Data Flow Dynamics</h2>
           <p className="text-muted-foreground text-sm leading-relaxed max-w-3xl mx-auto">

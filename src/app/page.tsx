@@ -114,17 +114,22 @@ export default function Home() {
             </TabsContent>
           </Tabs>
 
-          <DatasetStats />
-          <PipelineSection />
-
-          {systemType === "agent" && (
-            <div className="mt-8 pt-6 border-t border-muted/30">
+          <div className="mt-8 pt-6 border-t border-muted/30">
+            {systemType === "agent" ? (
               <p className="text-xs text-muted-foreground italic flex items-center gap-2 px-2">
                 <Settings2 className="h-3.5 w-3.5 text-primary/60" />
                 Note: Agents in this category represent specialized versions with task-specific adaptations for ContextBench.
               </p>
-            </div>
-          )}
+            ) : (
+              <p className="text-xs text-muted-foreground italic flex items-center gap-2 px-2">
+                <Settings2 className="h-3.5 w-3.5 text-primary/60" />
+                Note: Evaluations in this category are conducted based on our task-specific adaptations of the mini SWE-agent.
+              </p>
+            )}
+          </div>
+
+          <DatasetStats />
+          <PipelineSection />
         </div>
       </div>
 
