@@ -37,9 +37,6 @@ export default function Home() {
       
       <div className="container px-4 mx-auto flex-1">
         <Hero />
-        <Abstract />
-        <PipelineSection />
-        <DatasetStats />
         <StatsCards />
 
         <div className="bg-card rounded-3xl border border-muted/50 p-6 md:p-8 shadow-sm mb-12">
@@ -132,6 +129,10 @@ export default function Home() {
             )}
           </div>
         </div>
+
+        <Abstract />
+        <PipelineSection />
+        <DatasetStats />
       </div>
 
       <footer className="mt-32 py-12 border-t bg-muted/5">
