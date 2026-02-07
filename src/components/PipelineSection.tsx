@@ -63,7 +63,7 @@ export const PipelineSection = () => {
         </div>
         
         <Card className="border-muted/40 shadow-md bg-card/50 overflow-hidden">
-          <CardContent className="p-3">
+          <CardContent className="px-3 pb-3 pt-1">
             <div className="rounded-xl overflow-hidden border border-muted/20 bg-white p-1">
               <img 
                 src="/ContextBench/figures/data_filter.png" 
