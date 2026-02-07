@@ -1,0 +1,11 @@
+[
+  { "language": "Python", "repo": 20, "task": 512, "file": 1520, "block": 6714, "line": 115122 },
+  { "language": "Java", "repo": 6, "task": 57, "file": 262, "block": 3030, "line": 49057 },
+  { "language": "JavaScript", "repo": 9, "task": 153, "file": 819, "block": 3949, "line": 87907 },
+  { "language": "TypeScript", "repo": 8, "task": 119, "file": 537, "block": 1106, "line": 40621 },
+  { "language": "Go", "repo": 7, "task": 104, "file": 679, "block": 3000, "line": 71596 },
+  { "language": "Rust", "repo": 9, "task": 63, "file": 272, "block": 1842, "line": 50402 },
+  { "language": "C", "repo": 3, "task": 68, "file": 250, "block": 1591, "line": 62300 },
+  { "language": "C++", "repo": 4, "task": 60, "file": 209, "block": 1884, "line": 45110 },
+  { "language": "Total", "repo": 66, "task": 1136, "file": 4548, "block": 23116, "line": 522115, "isTotal": true }
+]

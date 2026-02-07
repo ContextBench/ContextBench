@@ -6,6 +6,8 @@ import { Hero } from "@/components/Hero";
 import { LeaderboardTable } from "@/components/LeaderboardTable";
 import { DetailedTable } from "@/components/DetailedTable";
 import { StatsCards } from "@/components/StatsCards";
+import { DatasetStats } from "@/components/DatasetStats";
+import { PipelineSection } from "@/components/PipelineSection";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { 
   Select, 
@@ -111,6 +113,9 @@ export default function Home() {
               </motion.div>
             </TabsContent>
           </Tabs>
+
+          <DatasetStats />
+          <PipelineSection />
 
           {systemType === "agent" && (
             <div className="mt-8 pt-6 border-t border-muted/30">
