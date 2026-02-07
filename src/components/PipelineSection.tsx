@@ -54,7 +54,7 @@ export const PipelineSection = () => {
       </div>
 
       {/* Data Flow */}
-      <div className="space-y-10 max-w-5xl mx-auto">
+      <div className="space-y-10 max-w-7xl mx-auto">
         <div className="text-center space-y-3">
           <h2 className="text-3xl font-bold tracking-tight">Data Flow Dynamics</h2>
           <p className="text-muted-foreground text-sm leading-relaxed max-w-3xl mx-auto">
@@ -63,8 +63,8 @@ export const PipelineSection = () => {
         </div>
         
         <Card className="border-muted/40 shadow-md bg-card/50 overflow-hidden">
-          <CardContent className="p-8">
-            <div className="rounded-xl overflow-hidden border border-muted/20 bg-white p-4">
+          <CardContent className="p-6">
+            <div className="rounded-xl overflow-hidden border border-muted/20 bg-white p-2">
               <img 
                 src="/ContextBench/figures/data_filter.png" 
                 alt="Data Flow" 
