@@ -29,7 +29,7 @@ export default function Home() {
   const copyResetTimerRef = useRef<number | null>(null);
 
   const findings = [
-    "More scaffolding does not mean better context retrieval.",
+    "Echoing \"The Bitter Lesson\": More scaffolding does not mean better context retrieval.",
     "Even frontier LLMs struggle to retrieve precise code context.",
     "LLMs favor recall over precision, introducing substantial noise.",
     "Balanced retrieval achieves higher accuracy at lower cost.",
@@ -170,21 +170,27 @@ export default function Home() {
         </div>
 
         <section className="mb-12 max-w-4xl mx-auto">
-          <div className="flex items-center gap-4 mb-6">
+          <div className="flex items-center gap-4 mb-8">
             <div className="h-px flex-1 bg-gradient-to-r from-transparent via-primary/20 to-primary/40" />
             <h2 className="text-sm font-bold uppercase tracking-[0.3em] text-primary/70">Key Findings</h2>
             <div className="h-px flex-1 bg-gradient-to-l from-transparent via-primary/20 to-primary/40" />
           </div>
-          <ul className="grid gap-3 md:gap-4">
+          <ul className="grid gap-4 md:gap-5">
             {findings.map((finding, index) => (
               <li
                 key={finding}
-                className="flex items-start gap-3 px-1 py-1"
+                className="flex items-center gap-5 p-5 md:p-6 rounded-2xl bg-muted/20 border border-muted/40 hover:bg-muted/40 transition-all duration-300 hover:scale-[1.01] group"
               >
-                <span className="mt-0.5 inline-flex h-6 min-w-6 items-center justify-center rounded-full bg-primary/10 text-[11px] font-bold text-primary">
+                <span className="flex h-8 w-8 md:h-10 md:w-10 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs md:text-sm font-bold text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
                   {index + 1}
                 </span>
-                <p className="text-sm md:text-base text-muted-foreground leading-relaxed">{finding}</p>
+                <p className="text-base md:text-xl font-medium text-foreground/90 leading-relaxed">
+                  {index === 0 ? (
+                    <>
+                      <span className="text-primary font-bold">Echoing "The Bitter Lesson":</span> More scaffolding does not mean better context retrieval.
+                    </>
+                  ) : finding}
+                </p>
               </li>
             ))}
           </ul>
