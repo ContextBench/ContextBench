@@ -29,19 +29,59 @@ export default function Home() {
   const copyResetTimerRef = useRef<number | null>(null);
 
   const findings = [
-    "Echoing \"The Bitter Lesson\": More scaffolding does not mean better context retrieval.",
-    "Even frontier LLMs struggle to retrieve precise code context.",
-    "LLMs favor recall over precision, introducing substantial noise.",
-    "Balanced retrieval achieves higher accuracy at lower cost.",
-    "Retrieved context is often not used in final solutions.",
+    {
+      text: "Echoing \"The Bitter Lesson\": More scaffolding does not mean better context retrieval.",
+      highlight: "\"The Bitter Lesson\""
+    },
+    {
+      text: "Even frontier LLMs struggle to retrieve precise code context.",
+      highlight: "precise code context"
+    },
+    {
+      text: "LLMs favor recall over precision, introducing substantial noise.",
+      highlight: "recall over precision"
+    },
+    {
+      text: "Balanced retrieval achieves higher accuracy at lower cost.",
+      highlight: "Balanced retrieval"
+    },
+    {
+      text: "Retrieved context is often not used in final solutions.",
+      highlight: "not used"
+    },
   ];
 
   const findingStyles = [
-    { bg: "bg-blue-50/40 dark:bg-blue-900/10", border: "border-blue-100/50 dark:border-blue-800/20", text: "text-blue-700 dark:text-blue-300", accent: "bg-blue-500/80" },
-    { bg: "bg-emerald-50/40 dark:bg-emerald-900/10", border: "border-emerald-100/50 dark:border-emerald-800/20", text: "text-emerald-700 dark:text-emerald-300", accent: "bg-emerald-500/80" },
-    { bg: "bg-amber-50/40 dark:bg-amber-900/10", border: "border-amber-100/50 dark:border-amber-800/20", text: "text-amber-700 dark:text-amber-300", accent: "bg-amber-500/80" },
-    { bg: "bg-indigo-50/40 dark:bg-indigo-900/10", border: "border-indigo-100/50 dark:border-indigo-800/20", text: "text-indigo-700 dark:text-indigo-300", accent: "bg-indigo-500/80" },
-    { bg: "bg-rose-50/40 dark:bg-rose-900/10", border: "border-rose-100/50 dark:border-rose-800/20", text: "text-rose-700 dark:text-rose-300", accent: "bg-rose-500/80" },
+    { 
+      // Deep Rose
+      text: "text-rose-950 dark:text-rose-50", 
+      highlight: "font-serif font-bold italic text-rose-700 bg-rose-100/60 dark:bg-rose-900/40 px-2 py-0.5 rounded-md decoration-rose-300 decoration-2 underline underline-offset-4",
+      stripe: "bg-rose-500"
+    },
+    { 
+      // Teal
+      text: "text-teal-950 dark:text-teal-50", 
+      highlight: "font-serif font-bold italic text-teal-700 bg-teal-100/60 dark:bg-teal-900/40 px-2 py-0.5 rounded-md decoration-teal-300 decoration-2 underline underline-offset-4",
+      stripe: "bg-teal-500"
+    },
+    { 
+      // Amber
+      text: "text-amber-950 dark:text-amber-50", 
+      highlight: "font-serif font-bold italic text-amber-700 bg-amber-100/60 dark:bg-amber-900/40 px-2 py-0.5 rounded-md decoration-amber-300 decoration-2 underline underline-offset-4",
+      stripe: "bg-amber-500"
+    },
+    { 
+      // Indigo
+      text: "text-indigo-950 dark:text-indigo-50", 
+      highlight: "font-serif font-bold italic text-indigo-700 bg-indigo-100/60 dark:bg-indigo-900/40 px-2 py-0.5 rounded-md decoration-indigo-300 decoration-2 underline underline-offset-4",
+      stripe: "bg-indigo-500"
+    },
+    { 
+      // Slate
+      text: "text-slate-950 dark:text-slate-50", 
+      highlight: "font-serif font-bold italic text-slate-700 bg-slate-100/60 dark:bg-slate-900/40 px-2 py-0.5 rounded-md decoration-slate-300 decoration-2 underline underline-offset-4",
+      stripe: "bg-slate-500"
+    },
   ];
 
   const bibtexText = `@misc{li2026contextbenchbenchmarkcontextretrieval,
@@ -177,37 +217,47 @@ export default function Home() {
           </div>
         </div>
 
-        <section className="mb-12 max-w-4xl mx-auto">
-          <div className="flex items-center justify-center gap-6 mb-10">
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-primary/20" />
-            <h2 className="text-xs font-bold uppercase tracking-[0.4em] text-primary/50 text-center">Key Findings</h2>
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-primary/20" />
+        <section className="mb-20 max-w-4xl mx-auto px-4">
+          <div className="mb-12 text-center">
+            <h2 className="font-serif text-3xl md:text-5xl text-foreground mb-6 tracking-tight font-medium">
+              Key Findings
+            </h2>
+            <div className="h-1 w-20 bg-foreground/10 mx-auto rounded-full" />
           </div>
-          <ul className="grid gap-4">
-            {findings.map((finding, index) => {
+
+          <div className="grid gap-6">
+            {findings.map((item, index) => {
               const style = findingStyles[index % findingStyles.length];
+              const parts = item.text.split(item.highlight);
+
               return (
-                <li
-                  key={finding}
-                  className={`group relative flex items-start gap-5 p-5 md:p-6 rounded-3xl border transition-all duration-500 hover:shadow-xl hover:shadow-primary/5 ${style.bg} ${style.border} overflow-hidden`}
+                <div
+                  key={index}
+                  className="group relative flex items-start p-6 md:p-8 rounded-2xl bg-white/50 dark:bg-zinc-900/50 border border-muted/60 transition-all duration-500 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:bg-white dark:hover:bg-zinc-900"
                 >
-                  <div className={`absolute left-0 top-0 bottom-0 w-1.5 ${style.accent} opacity-60 group-hover:opacity-100 transition-opacity`} />
-                  <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl ${style.bg} ${style.text} border ${style.border} text-sm font-bold shadow-sm transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3`}>
-                    {index + 1}
-                  </span>
-                  <div className="space-y-1">
-                    <p className="text-base md:text-lg font-medium text-foreground/80 leading-relaxed tracking-tight">
-                      {index === 0 ? (
-                        <>
-                          <span className={`${style.text} font-bold decoration-dotted underline underline-offset-4 decoration-current/30`}>Echoing "The Bitter Lesson":</span> More scaffolding does not mean better context retrieval.
-                        </>
-                      ) : finding}
+                  {/* Left Accent Stripe */}
+                  <div className={`absolute left-0 top-6 bottom-6 w-1 rounded-r-full ${style.stripe} opacity-30 group-hover:opacity-100 transition-all duration-500 scale-y-75 group-hover:scale-y-100`} />
+                  
+                  {/* Content Container */}
+                  <div className="flex gap-6 md:gap-8 w-full pl-3">
+                    {/* Numbering */}
+                    <span className="flex-shrink-0 font-serif text-3xl md:text-4xl text-muted-foreground/20 font-light select-none group-hover:text-foreground/80 transition-colors duration-500">
+                      0{index + 1}
+                    </span>
+
+                    {/* Text Content */}
+                    <p className={`text-lg md:text-xl leading-relaxed text-muted-foreground group-hover:text-foreground/80 transition-colors duration-300 w-full`}>
+                      {parts[0]}
+                      <span className={`inline-block transform transition-transform duration-300 group-hover:-translate-y-0.5 ${style.highlight} shadow-sm`}>
+                        {item.highlight}
+                      </span>
+                      {parts[1]}
                     </p>
                   </div>
-                </li>
+                </div>
               );
             })}
-          </ul>
+          </div>
         </section>
 
         <Abstract />

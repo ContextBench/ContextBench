@@ -17,9 +17,9 @@ export const Abstract = () => {
         <div className="absolute bottom-0 left-0 -mb-20 -ml-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
 
         <div className="relative space-y-12">
-          <div className="flex flex-col items-center gap-3">
-            <h2 className="text-xs font-bold uppercase tracking-[0.5em] text-primary/40">Abstract</h2>
-            <div className="h-1 w-8 bg-gradient-to-r from-transparent via-primary/30 to-transparent rounded-full" />
+          <div className="flex flex-col items-center gap-4">
+            <h2 className="font-serif text-3xl md:text-5xl text-foreground/90 font-medium tracking-tight">Abstract</h2>
+            <div className="h-1 w-20 bg-gradient-to-r from-transparent via-primary/20 to-transparent rounded-full" />
           </div>
           
           <div className="space-y-8 text-base md:text-[1.05rem] leading-[1.85] text-muted-foreground/90 font-sans text-justify hyphens-auto max-w-3xl mx-auto">
